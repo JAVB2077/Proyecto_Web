@@ -1,13 +1,19 @@
 package com.proyect.ptics.actividad;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.proyect.ptics.usuario.Usuario;
+
+import com.proyect.ptics.calendarizacion.Calendarizacion;
+import com.proyect.ptics.estrategias.Estrategias;
+import com.proyect.ptics.indicadorResultado.IndicadorResultado;
+import com.proyect.ptics.medioVerificacion.MedioVerificacion;
+import com.proyect.ptics.programaPresupuestario.ProgramaPresupuestario;
+import com.proyect.ptics.unidadMedida.UnidadMedida;
+import com.proyect.ptics.unidadResponsable.UnidadResponsable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import com.proyect.ptics.lineas_accion.LineaAccion;
-import com.proyect.ptics.unidad_responsable.UnidadResponsable;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,38 +21,45 @@ import com.proyect.ptics.unidad_responsable.UnidadResponsable;
 @ToString
 @Entity
 @Table(name = "actividad")
-public class Actividad {
+public class Actividad { //descripcion, medios de verificacion, indicador de resultados, cantidad anual
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idActividad;
-
     @Column(nullable = false, length = 100)
-    private String nombre;
+    private String descripcion;
 
-    @Column(nullable = false, length = 100)
-    private String estrategia;
-
-    @OneToOne
-    @JoinColumn(name = "idLinea_Accion")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idEstrategias")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private LineaAccion linea_accion;
+    private Estrategias estrategias;
 
-    @Column(nullable = false, length = 10)
-    private String medioVerificacion;
-
-    @OneToOne
-    @JoinColumn(name = "idUnidad_responsable")
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "idUnidadResponsable")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private UnidadResponsable unidad_responsable;
+    private UnidadResponsable unidadResponsable;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "idIndicadorResultado")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Usuario usuario;
+    private IndicadorResultado indicadorResultado;
 
-    @Column(nullable = false, length = 20)
-    private String fecha_inicio;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "idUnidadMedida")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private UnidadMedida unidadMedida;
 
-    @Column(nullable = false, length = 20)
-    private String fecha_fin;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "idMedioVerificacion")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private MedioVerificacion medioVerificacion;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "idProgramaPresupuestario")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private ProgramaPresupuestario programaPresupuestario;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "idCalendarizacion")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Calendarizacion calendarizacion;
 }

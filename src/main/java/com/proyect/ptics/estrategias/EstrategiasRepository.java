@@ -1,6 +1,6 @@
-package com.proyect.ptics.usuario.rol;
+package com.proyect.ptics.estrategias;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 @Repository
-public interface RolRepository extends CrudRepository<Rol, Long> {
+public interface EstrategiasRepository extends CrudRepository<Estrategias, Long> {
 }
