@@ -21,6 +21,6 @@ public class IndicadorResultado {
     private Long idIndicadorResultado;
     @Column(nullable = false, length = 45)
     private String descripcion;
-    @OneToMany(mappedBy = "indicador-resultado")
+    @OneToMany(mappedBy = "indicadorResultado")
     private List<Actividad> actividad;
 }

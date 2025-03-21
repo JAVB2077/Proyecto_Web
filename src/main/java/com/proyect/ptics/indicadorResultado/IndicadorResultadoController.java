@@ -26,13 +26,13 @@ public class IndicadorResultadoController {
     public ResponseEntity<Void> create(@RequestBody IndicadorResultado newIndicadorResultado, UriComponentsBuilder ucb) {
         IndicadorResultado savedIndicadorResultado = indicadorResultadoRepository.save(newIndicadorResultado);
         URI uri =ucb
-                .path("indicador-resultado/{idIndicadorResultado")
+                .path("indicador-resultado/{idIndicadorResultado}")
                 .buildAndExpand(savedIndicadorResultado.getIdIndicadorResultado())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @PostMapping("/{idIndicadorResultado")
+    @PostMapping("/{idIndicadorResultado}")
     public ResponseEntity<Void> update(@PathVariable Long idIndicadorResultado, @RequestBody IndicadorResultado indicadorResultadoAct) {
         IndicadorResultado indicadorResultadoAnt = indicadorResultadoRepository.findById(idIndicadorResultado).get();
         if (indicadorResultadoAnt != null) {

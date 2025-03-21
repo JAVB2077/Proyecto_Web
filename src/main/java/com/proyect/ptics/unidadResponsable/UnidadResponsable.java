@@ -25,9 +25,9 @@ public class UnidadResponsable {
     private Long idUnidadResponsable;
     @Column(nullable = false, length = 45)
     private String nombre;
-    @OneToOne(mappedBy = "unidad-responsable",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "unidadResponsable",cascade = CascadeType.ALL)
     private JefesUnidad jefesUnidad;
 
-    @OneToMany(mappedBy = "unidad-responsable")
+    @OneToMany(mappedBy = "unidadResponsable")
     private List<Actividad> actividad;
 }

@@ -24,6 +24,6 @@ public class ProgramaPresupuestario {
     private String nombre;
     @Column(nullable = false, length = 45)
     private String firmas;
-    @OneToMany(mappedBy = "programa-presupuestario")
+    @OneToMany(mappedBy = "programaPresupuestario")
     private List<Actividad> actividad;
 }

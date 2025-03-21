@@ -21,6 +21,6 @@ public class UnidadMedida {
     private Long idUnidadMedida;
     @Column(nullable = false, length = 45)
     private String descripcion;
-    @OneToMany(mappedBy = "indicador-resultados")
+    @OneToMany(mappedBy = "unidadMedida")
     private List<Actividad> actividad;
 }

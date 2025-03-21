@@ -21,6 +21,6 @@ public class MedioVerificacion {
     private Long idMedioVerificacion;
     @Column(nullable = false, length = 50)
     private String descripcion;
-    @OneToMany(mappedBy = "medio-verificacion")
+    @OneToMany(mappedBy = "medioVerificacion")
     private List<Actividad> actividad;
 }
