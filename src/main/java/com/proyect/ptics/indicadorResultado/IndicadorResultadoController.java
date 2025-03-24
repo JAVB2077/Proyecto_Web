@@ -32,7 +32,7 @@ public class IndicadorResultadoController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PostMapping("/{idIndicadorResultado}")
+    @PutMapping("/{idIndicadorResultado}")
     public ResponseEntity<Void> update(@PathVariable Long idIndicadorResultado, @RequestBody IndicadorResultado indicadorResultadoAct) {
         IndicadorResultado indicadorResultadoAnt = indicadorResultadoRepository.findById(idIndicadorResultado).get();
         if (indicadorResultadoAnt != null) {

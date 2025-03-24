@@ -1,4 +1,5 @@
 package com.proyect.ptics.calendarizacion;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.proyect.ptics.actividad.Actividad;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,12 @@ public class Calendarizacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCalendarizacion;
     @Column(nullable = false, length = 15)
-    private int mes;
-    private int cantidadAnual;//pasarlo a la clase actividad
+    private byte mes;
     private int cantidadMensual;
     private Float presupuesto;
 
-    @OneToMany(mappedBy = "calendarizacion")//hacerlo many to one
-    private List<Actividad> actividad;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)//
+    @JoinColumn(name = "idActividad")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Actividad actividad;
 }

@@ -22,7 +22,7 @@ public class EstrategiasController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody Estrategias newEstrategias,UriComponentsBuilder ucb){
-        Estrategias savedEstrategias = estrategiasRepository.save(new Estrategias());
+        Estrategias savedEstrategias = estrategiasRepository.save(newEstrategias);
         URI uri =ucb
                 .path("estrategias/{idEstrategias}")
                 .buildAndExpand(savedEstrategias.getIdEstrategias())

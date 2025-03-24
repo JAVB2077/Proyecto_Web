@@ -13,7 +13,7 @@ public class UnidadMedidaController {
     @GetMapping()
     public ResponseEntity<Iterable<UnidadMedida>> findAll(){return ResponseEntity.ok(unidadMedidaRepository.findAll());}
 
-    @GetMapping("/idUnidadMedida")
+    @GetMapping("/{idUnidadMedida}")
     public ResponseEntity<UnidadMedida> finById(@PathVariable Long idUnidadMedida){
         Optional<UnidadMedida> UnidadMedidaOptional = unidadMedidaRepository.findById(idUnidadMedida);
         if (UnidadMedidaOptional.isPresent()){return ResponseEntity.ok(UnidadMedidaOptional.get());}

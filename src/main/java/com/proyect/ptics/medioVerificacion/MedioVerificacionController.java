@@ -34,17 +34,17 @@ public class MedioVerificacionController {
     public ResponseEntity<Void> update(@PathVariable Long idMedioVerificacion, @RequestBody MedioVerificacion medioVerificacionAct) {
         MedioVerificacion medioVerificacionAnt = medioVerificacionRepository.findById(idMedioVerificacion).get();
         if (medioVerificacionAnt != null) {
-            medioVerificacionAct.setDescripcion(medioVerificacionAct.getDescripcion());
-            medioVerificacionRepository.save(medioVerificacionAnt);
+            medioVerificacionAct.setIdMedioVerificacion(idMedioVerificacion);
+            medioVerificacionRepository.save(medioVerificacionAct);
             return ResponseEntity.ok().build();
         }else {return ResponseEntity.notFound().build();}
     }
 
     @DeleteMapping("/{idMedioVerificacion}")
     public ResponseEntity<Void> delete(@PathVariable Long idMedioVerificacion) {
-        if (medioVerificacionRepository.existsById(idMedioVerificacion)) {
+        if (medioVerificacionRepository.findById(idMedioVerificacion).get() != null) {
             medioVerificacionRepository.deleteById(idMedioVerificacion);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().build();
         }return ResponseEntity.notFound().build();
     }
 }

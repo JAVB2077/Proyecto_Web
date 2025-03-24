@@ -1,6 +1,5 @@
 package com.proyect.ptics.actividad;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.proyect.ptics.calendarizacion.Calendarizacion;
 import com.proyect.ptics.estrategias.Estrategias;
 import com.proyect.ptics.indicadorResultado.IndicadorResultado;
@@ -14,6 +13,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +28,7 @@ public class Actividad { //descripcion, medios de verificacion, indicador de res
     private Long idActividad;
     @Column(nullable = false, length = 100)
     private String descripcion;
+    private int cantidadAnual;//pasarlo a la clase actividad
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idEstrategias")
@@ -58,8 +60,6 @@ public class Actividad { //descripcion, medios de verificacion, indicador de res
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ProgramaPresupuestario programaPresupuestario;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "idCalendarizacion")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Calendarizacion calendarizacion;
+    @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL)
+    private List<Calendarizacion> calendarizacion = new ArrayList<Calendarizacion>();
 }
